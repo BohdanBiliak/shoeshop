@@ -1,0 +1,20 @@
+workflows:
+  shoeshop-build:
+    name: Build ShoeShop iOS App
+    max_build_duration: 10
+    environment:
+      xcode: latest
+      vars:
+        XCODE_PROJECT: "ShoeShop.xcodeproj"
+        XCODE_SCHEME: "ShoeShop"
+        PROJECT_PATH: "ShoeShop"
+    scripts:
+      - name: Build iOS app
+        script: |
+          cd $PROJECT_PATH
+          xcodebuild build \
+            -project $XCODE_PROJECT \
+            -scheme $XCODE_SCHEME \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14' \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
